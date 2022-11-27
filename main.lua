@@ -2,50 +2,43 @@
 --  import file  --
 -- ------------- --
 
-require("data.user")
-require("data.pass")
+require("data.database")
 
----------
--- var --
----------
+-- -------- --
+-- variable --
+-- -------- --
 
-local name
-local password
+local isAuth = false
+local username
+local userpass
 
 -- -------- --
 -- function --
 -- -------- --
 
-local function username_check(Username, name)
-	for key_a, value_a in pairs(Username) do
-		if value_a == name then
-			return true
-		end
-	end
-	return false
-end
-
-local function pass_check(Pass, password)
-	for key_b, value_b in pairs(Pass) do
-		if value_b == password then
-			return true
-		end
-	end
-	return false
+local function Auth(un, up)
+  for i = 1, #Database, 1 do
+    if un == Database[i]['name'] then
+      if up == Database[i]['pass'] then
+        isAuth = true
+      end
+    end
+  end
 end
 
 -- --------- --
 -- main code --
 -- --------- --
 
-print("enter your Username")
-name = io.read()
+io.write("Enter username: ")
+username = io.read()
 
-print("enter your password")
-password = io.read()
+io.write("Enter password: ")
+userpass = io.read()
 
-if username_check(Username, name) == true and pass_check(Pass, password) == true then
-	print("welcome")
+Auth(username, userpass)
+if isAuth == true then
+  print('Welcome')
 else
-	print("error")
+  print('Error')
 end
